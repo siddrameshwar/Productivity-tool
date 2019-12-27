@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.22.48" id="ResourceRegistry"
+             SeparateXMLFiles="false" Package="RESTmodel" ClientType="Generic">
+  <pageMap>
+    <page path="v0_AllTasks" usageId="v0_AppModule_AllTasksViewResources"/>
+    <page path="v0_DaysData" usageId="v0_AppModule_DaysDataViewResources"/>
+  </pageMap>
+  <dataControlUsages>
+    <BC4JDataControl id="AppModuleDataControl" Package="RESTmodel"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+  <pageDefinitionUsages>
+    <page id="v0_AppModule_AllTasksViewResources" path="RESTmodel.rest.v0.AppModule_AllTasksViewResources"/>
+    <page id="v0_AppModule_DaysDataViewResources" path="RESTmodel.rest.v0.AppModule_DaysDataViewResources"/>
+  </pageDefinitionUsages>
+</Application>

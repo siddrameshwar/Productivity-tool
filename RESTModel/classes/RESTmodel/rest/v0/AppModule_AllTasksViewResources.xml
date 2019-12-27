@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.22.48"
+                id="AppModule_AllTasksViewResources" Package="RESTmodel.rest.v0" usageMode="RESTClient">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AllTasksView1" RangeSize="25" DataControl="AppModuleDataControl" id="AllTasksView1Iter"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="AllTasksView1Iter" id="AllTasks" AccessorFolder="Always">
+      <nodeDefinition DefName="RESTmodel.AllTasksView" Name="RESTmodel.AllTasksView"/>
+    </tree>
+  </bindings>
+</pageDefinition>

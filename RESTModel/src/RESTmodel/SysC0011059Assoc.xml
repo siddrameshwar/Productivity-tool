@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SysC0011059Assoc"
+  Version="12.2.1.22.48"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="AllTasks"
+    Cardinality="1"
+    Source="true"
+    Owner="RESTmodel.AllTasks">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="AllTasks"/>
+      <Attr Name="_foreignKey" Value="RESTmodel.AllTasks.SysC0011056"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="RESTmodel.AllTasks.TaskId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="DaysData"
+    Cardinality="-1"
+    Owner="RESTmodel.DaysData">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="DaysData"/>
+      <Attr Name="_foreignKey" Value="RESTmodel.DaysData.SysC0011059"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="RESTmodel.DaysData.TaskId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

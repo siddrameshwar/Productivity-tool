@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppModule"
+  Version="12.2.1.22.48"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="AllTasksView1"
+    ViewObjectName="RESTmodel.AllTasksView"/>
+  <ViewUsage
+    Name="DaysDataView1"
+    ViewObjectName="RESTmodel.DaysDataView"/>
+  <ViewUsage
+    Name="DaysDataView2"
+    ViewObjectName="RESTmodel.DaysDataView"/>
+  <ViewLinkUsage
+    Name="SysC0011059Link1"
+    ViewLinkObjectName="RESTmodel.SysC0011059Link"
+    SrcViewUsageName="RESTmodel.AppModule.AllTasksView1"
+    DstViewUsageName="RESTmodel.AppModule.DaysDataView2"
+    Reversed="false"/>
+</AppModule>
