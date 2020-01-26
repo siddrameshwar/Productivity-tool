@@ -1,0 +1,47 @@
+/*
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+} */
+
+#allTasks, #daysTasks, #pendingTasks, #doneTasks {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  
+  width: 100%;
+}
+
+#allTasks td, #allTasks th, #daysTasks td, #daysTasks th, #pendingTasks td, #pendingTasks th, #doneTasks  td, #doneTasks th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#allTasks tr:nth-child(even){background-color: #f2f2f2;}
+#daysTasks tr:nth-child(even){background-color: #f2f2f2;}
+
+#allTasks tr:hover {background-color: #ddd;}
+#daysTasks tr:hover {background-color: #ddd;}
+
+#pendingTasks tr:hover {background-color: #ddd;}
+#pendingTasks tr:hover {background-color: #ddd;}
+
+#doneTasks tr:hover {background-color: #ddd;}
+#doneTasks tr:hover {background-color: #ddd;}
+
+#allTasks th, #daysTasks th, #pendingTasks th, #doneTasks th {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}

@@ -3,53 +3,10 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="stylesheet.css">
 <style>
-<!--
-.form-popup {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
 
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-} -->
-
-#allTasks, #daysTasks, #pendingTasks, #doneTasks {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#allTasks td, #allTasks th, #daysTasks td, #daysTasks th, #pendingTasks td, #pendingTasks th, #doneTasks  td, #doneTasks th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#allTasks tr:nth-child(even){background-color: #f2f2f2;}
-#daysTasks tr:nth-child(even){background-color: #f2f2f2;}
-
-#allTasks tr:hover {background-color: #ddd;}
-#daysTasks tr:hover {background-color: #ddd;}
-
-#pendingTasks tr:hover {background-color: #ddd;}
-#pendingTasks tr:hover {background-color: #ddd;}
-
-#doneTasks tr:hover {background-color: #ddd;}
-#doneTasks tr:hover {background-color: #ddd;}
-
-#allTasks th, #daysTasks th, #pendingTasks th, #doneTasks th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;
-}
 </style>
 
 <link rel="shortcut icon" href="https://www.geeksforgeeks.org/favicon.ico" type="image/x-icon">
@@ -76,6 +33,7 @@
 		<th>Hours planned</th>
 		<th>Hours spent</th>
 		<th>Date</th>
+		<th>Save changes</th>
 	</tr>
 </table>
 <br>
@@ -87,27 +45,16 @@
 		<th>Hours planned</th>
 		<th>Hours spent</th>
 		<th>Date</th>
+		<th>Save changes</th>
 	</tr>	
 	
 
 </table>
 <br>
-<br>
-
-<table id="allTasks">
-	<caption>All Tasks</caption>
-	<tr>
-		<th>Task Name </th>
-		<th>Total hours Req</th>
-		<th>Hours spent</th>		
-	</tr>	
-	
-
-</table>
 <br>
 <h3>Add new task </h3>
 <!--button onClick="createNewTask()">Add new task </button-->
-<div class="form-popup" id="myForm">
+<!--div class="form-popup" id="myForm">
 	<form id="form1" class="form-container" action="http://localhost:7101/OnTrack-RESTWebService-context-root/rest/v0/AllTasks" method="post">
 		<input type="text" id="TaskId" placeholder="TaskId"> </input>
 		<input type="text" id="TaskName" placeholder="Task Name"> </input>
@@ -115,8 +62,28 @@
 		<input type="text" id="TimeSpent"  placeholder="Hours spent"> </input>
 		<!--input type="submit" name="Submit" value="Submit" /--> 
 	</form>
-</div>
+</div-->
+<form id="form1" >
+		<input type="text" id="TaskId" placeholder="TaskId"> </input>
+		<input type="text" id="TaskName" placeholder="Task Name"> </input>
+		<input type="text" id="TimeReqtoComplete"  placeholder="Total hours Req"> </input>
+		<input type="text" id="TimeSpent"  placeholder="Hours spent"> </input>
+		<!--input type="submit" name="Submit" value="Submit" /--> 
+	</form>
 <button onClick="createNewTask()">Save </button>
+<table id="allTasks">
+	<caption>All Tasks</caption>
+	<tr>
+		<th>Task Name </th>
+		<th>Total hours Req</th>
+		<th>Hours spent</th>	
+		<th>Save changes</th>		
+	</tr>	
+	
+
+</table>
+<br>
+
 <br>
 <table id="daysTasks">
 	<caption>Day to day Tasks</caption>
@@ -133,201 +100,6 @@
 <br>
 <br>
 
-<script>
-
-fetch('http://localhost:7101/OnTrack-RESTWebService-context-root/rest/v0/AllTasks')
-  .then(response => response.json())
-  .then(data => getAllTask(data))
-
-function getAllTask(data) {
-	var result = document.getElementById("allTasks").innerHTML ;
-	for(var i =0; i < data.count; i++) {
-		result += "<tr>";
-		result += "<td><div contenteditable>" + data.items[i].TaskName + "</div></td>" ;
-		result += "<td><div contenteditable>" + data.items[i].TimeReqtoComplete + "</div></td>" ;
-		result += "<td><div contenteditable>" + data.items[i].TimeSpent+ "</div>	</td>" ;
-		result += "<td><button> Save </button></td>";
-		result += "</tr>";
-	}
-	
-	
-	document.getElementById("allTasks").innerHTML = result;
-	//console.log(data.items[0]);
-	//console.log(data);
-}
-
-
-fetch('http://localhost:7101/OnTrack-RESTWebService-context-root/rest/v0/DaysData')
-  .then(response => response.json())
-  .then(data => getDaysTask(data))
-
-function getDaysTask(data) {
-	var result = document.getElementById("daysTasks").innerHTML ;
-	for(var i =0; i < data.count; i++) {
-		result += "<tr>";
-		result += "<td>" + data.items[i].TaskName + "</td>" ;
-		result += "<td>" + data.items[i].PlannedTime + "</td>" ;
-		result += "<td>" + data.items[i].TimeSpent+ "</td>" ;
-		var d = data.items[i].DateVal;
-		var date = new Date(d);
-		var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-		result += "<td>" +  date.getDate()+" "+ months[date.getMonth()]+" "+ date.getFullYear()+"</td>" ;
-		result += "</tr>";
-	}
-	
-	document.getElementById("daysTasks").innerHTML = result;
-	//console.log(data.items[0]);
-	//console.log(data);
-}
-
-function createNewTask() {
-	//var result = document.getElementById("daysTasks").innerHTML ;
-	var elements = document.getElementById("form1").elements;
-	var result = "{";
-	var i = 0
-	for (; i < elements.length - 2; i++) {
-		
-		if (elements[i].type === "text")
-			result += '\"' + elements[i].id + '":"' + elements[i].value + '",';
-	}
-	if(elements[i].type === "text")
-		result += '\"' + elements[i].id + '":"' + elements[i].value + '"';
-	//if (element.type === "text" && element.value === "")
-			//console.log("it's an empty textfield")
-	result += "}";
-
-	console.log(result);
-	var xhr = new XMLHttpRequest();
-	var url = "http://localhost:7101/OnTrack-RESTWebService-context-root/rest/v0/AllTasks";
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-Type", "application/json");
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4 && xhr.status === 200) {
-			var json = JSON.parse(xhr.responseText);
-			console.log(json.email + ", " + json.password);
-		}
-	};
-	var data = JSON.stringify(result);
-	//var data = '{"TaskId":"48","TaskName":"11","TimeReqtoComplete":"11","TimeSpent":"11"}';
-	console.log("**********--------------------************------------**************");
-	console.log(result);
-	//console.log(data);
-	xhr.send(result);
-	//var taskName = document.getElementById("TaskId");
-	//console.log(result);
-		/*var formData = JSON.stringify($("#form1").serializeArray());
-		console.log("********************************************_________________********");
-		console.log(formData);
-		
-		$.ajax({
-		  type: "POST",
-		  url: "http://localhost:7101/OnTrack-RESTWebService-context-root/rest/v0/AllTasks",
-		  data: formData,
-		  success: function(){},
-		  dataType: "json",
-		  contentType : "application/json"
-		});
-	*/
-
-}
-
-function addTask() {
-	var elements = document.getElementById("form2").elements;
-	var result = "{";
-	var i = 0
-	for (; i < elements.length ; i++) {
-		
-		if (elements[i].type === "text")
-			result += '\"' + elements[i].id + '":"' + elements[i].value + '",';
-	}
-	//if(elements[i].type === "text")
-		//result += '\"' + elements[i].id + '":"' + elements[i].value + '"';
-	result += '\"' + "DateVal" + '":' + JSON.stringify(new Date());
-	//if (element.type === "text" && element.value === "")
-			//console.log("it's an empty textfield")
-	result += "}";
-
-	//console.log(result);
-	var xhr = new XMLHttpRequest();
-	var url = "http://localhost:7101/OnTrack-RESTWebService-context-root/rest/v0/DaysData";
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-Type", "application/json");
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4 && xhr.status === 200) {
-			var json = JSON.parse(xhr.responseText);
-			console.log(json.email + ", " + json.password);
-		}
-	};
-	var data = JSON.stringify(result);
-	//var data = '{"TaskId":"48","TaskName":"11","TimeReqtoComplete":"11","TimeSpent":"11"}';
-	//console.log("**********--------------------************------------**************");
-	//console.log(result);
-	//console.log(data);
-	xhr.send(result);
-
-}
-
-
-fetch('http://localhost:7101/OnTrack-RESTWebService-context-root/rest/v0/DaysData?q=TaskCompleted=N')
-  .then(response => response.json())
-  .then(data => getTodaysPendingTask(data))
-
-function getTodaysPendingTask(data) {
-	var result = document.getElementById("pendingTasks").innerHTML ;
-	var todayDate = new Date(Date());
-	for(var i =0; i < data.count; i++) {
-		var d = data.items[i].DateVal;		
-		var date = new Date(d);
-		//console.log(date);
-		if(todayDate.getDate() == date.getDate() && todayDate.getMonth() == date.getMonth() && todayDate.getFullYear() == date.getFullYear()) {
-			result += "<tr>";
-			result += "<td>" + data.items[i].TaskName + "</td>" ;
-			result += "<td>" + data.items[i].PlannedTime + "</td>" ;
-			result += "<td>" + data.items[i].TimeSpent+ "</td>" ;
-			//var d = data.items[i].DateVal;
-			//var date = new Date(d);
-			var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-			result += "<td>" +  date.getDate()+" "+ months[date.getMonth()]+" "+ date.getFullYear()+"</td>" ;
-			result += "</tr>";		
-		}
-		
-	}
-	
-	document.getElementById("pendingTasks").innerHTML = result;
-	//console.log(data.items[0]);
-	//console.log(data);
-}
-
-fetch('http://localhost:7101/OnTrack-RESTWebService-context-root/rest/v0/DaysData?q=TaskCompleted=Y')
-  .then(response => response.json())
-  .then(data => getDaysCompletedTask(data))
-
-function getDaysCompletedTask(data) {
-	var result = document.getElementById("doneTasks").innerHTML ;
-	for(var i =0; i < data.count; i++) {
-		result += "<tr>";
-		result += "<td>" + data.items[i].TaskName + "</td>" ;
-		result += "<td>" + data.items[i].PlannedTime + "</td>" ;
-		result += "<td>" + data.items[i].TimeSpent+ "</td>" ;
-		var d = data.items[i].DateVal;
-		var date = new Date(d);
-		var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-		result += "<td>" +  date.getDate()+" "+ months[date.getMonth()]+" "+ date.getFullYear()+"</td>" ;
-		result += "</tr>";
-	}
-	
-	document.getElementById("doneTasks").innerHTML = result;
-	//console.log(data.items[0]);
-	//console.log(data);
-}
-
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
-</script>
+<script src="mainScript.js"></script>
 </body>
 </html>
