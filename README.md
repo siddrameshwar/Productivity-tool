@@ -8,4 +8,4 @@ There are 3 tables in this application. One for Today’s pending work. One for 
 In this application, We can add the things we want to work on a particular day and the number of hours that we want to spend on that. We should keep updating the table as and when we finish some of those tasks. There is a table which will remind the users the pending tasks. 
 
 I plan on implementing a graph which will showcase the number of hours a user spent on the tasks he/she planned. It will also showcase the number of hours not put in for each. The reason for this is many of us don’t really know how much time we are being productive. Many of us think we spend a lot more time on productive things than we actually do.
-.
+..
